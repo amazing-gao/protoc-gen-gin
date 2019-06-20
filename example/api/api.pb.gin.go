@@ -50,6 +50,6 @@ func EchoServicePing(svc EchoServiceGinServer) func(ctx *gin.Context) {
 }
 
 func RegisterEchoServiceGinServer(engine *gin.Engine, server EchoServiceGinServer) {
-	engine.POST("/v1/example/echo", EchoServiceEcho(server))
+	engine.POST("/v1/echo", EchoServiceEcho(server))
 	engine.GET("/v1/ping", EchoServicePing(server))
 }

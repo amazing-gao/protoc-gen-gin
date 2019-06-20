@@ -5,25 +5,19 @@ mv protoc-gen-gin ~/go/bin/protoc-gen-gin
 
 protoc -I/usr/local/include \
   -I . \
-  -I $GOPATH/src \
-  -I $GOPATH/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
-  -I $GOPATH/src/github.com/gogo/protobuf \
+  -I third_party \
   --gofast_out=logtostderr=true:. \
   example/api/api.proto
 
 
 protoc -I/usr/local/include \
   -I . \
-  -I $GOPATH/src \
-  -I $GOPATH/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
-  -I $GOPATH/src/github.com/gogo/protobuf \
+  -I third_party \
   --gin_out=logtostderr=true:. \
   example/api/api.proto
 
 protoc -I/usr/local/include \
   -I . \
-  -I $GOPATH/src \
-  -I $GOPATH/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
-  -I $GOPATH/src/github.com/gogo/protobuf \
+  -I third_party \
   --swagger_out=logtostderr=true:. \
   example/api/api.proto

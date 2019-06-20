@@ -11,13 +11,23 @@ type (
 )
 
 func (ctrl *EchoServices) Echo(ctx context.Context, msg *api.EchoReq) (*api.EchoResp, error) {
-	return &api.EchoResp{
-		// Error: &api.Error{
-		// 	Errcode: -1,
-		// 	Errmsg:  "aa",
-		// },
-		Value: "hi " + msg.Value,
-	}, nil
+	// value := &api.EchoResp_Value{
+	// 	Value: "123",
+	// }
+
+	err := &api.EchoResp_Error{
+		Error: &api.Error{
+			Status:  200,
+			Errcode: -1,
+			Errmsg:  "crash",
+		},
+	}
+
+	resp := &api.EchoResp{
+		Data: err,
+	}
+
+	return resp, nil
 }
 
 func (ctrl *EchoServices) Ping(ctx context.Context, msg *api.PingReq) (*api.PingResp, error) {
