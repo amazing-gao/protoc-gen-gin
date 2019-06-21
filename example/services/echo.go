@@ -1,37 +1,36 @@
 package services
 
 import (
+	"log"
 	"context"
 
 	"github.com/BiteBit/protoc-gen-gin/example/api"
 )
 
 type (
-	EchoServices struct{}
+	UserServices struct{}
 )
 
-func (ctrl *EchoServices) Echo(ctx context.Context, msg *api.EchoReq) (*api.EchoResp, error) {
-	// value := &api.EchoResp_Value{
-	// 	Value: "123",
-	// }
+func (ctrl *UserServices) Login(ctx context.Context, req *api.LoginReq) (*api.LoginResp, error) {
+	resp := &api.LoginResp{}
 
-	err := &api.EchoResp_Error{
-		Error: &api.Error{
-			Status:  200,
-			Errcode: -1,
-			Errmsg:  "crash",
-		},
-	}
-
-	resp := &api.EchoResp{
-		Data: err,
-	}
+	log.Println(req)
 
 	return resp, nil
 }
 
-func (ctrl *EchoServices) Ping(ctx context.Context, msg *api.PingReq) (*api.PingResp, error) {
-	return &api.PingResp{
-		Value: "pong",
-	}, nil
+func (ctrl *UserServices) Page(ctx context.Context, req *api.UserPageReq) (*api.UserPageResp, error) {
+	resp := &api.UserPageResp{}
+
+	log.Println(req)
+
+	return resp, nil
+}
+
+func (ctrl *UserServices) Info(ctx context.Context, req *api.UserInfoReq) (*api.UserInfoResp, error)  {
+	log.Println(req)
+
+	resp := &api.UserInfoResp{}
+
+	return resp, nil
 }

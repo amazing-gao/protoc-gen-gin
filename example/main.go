@@ -9,7 +9,7 @@ import (
 func main() {
 	engine := gin.Default()
 
-	api.RegisterEchoServiceGinServer(engine, &services.EchoServices{})
+	api.RegisterUserServiceGinServer(engine, &services.UserServices{})
 
 	engine.Run(":8080")
 }

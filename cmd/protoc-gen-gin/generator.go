@@ -149,6 +149,7 @@ func (g *Generator) genSvcImplement() {
 			g.P("		}")
 			g.P("	}")
 			g.P("}")
+			g.P("")
 		}
 	}
 }

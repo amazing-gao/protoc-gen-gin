@@ -4,43 +4,28 @@
 package api
 
 import (
+	"log"
 	"context"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 )
 
-type EchoServiceGinServer interface {
-	Echo(ctx context.Context, req *EchoReq) (resp *EchoResp, err error)
-	Ping(ctx context.Context, req *PingReq) (resp *PingResp, err error)
+type UserServiceGinServer interface {
+	Login(ctx context.Context, req *LoginReq) (resp *LoginResp, err error)
+	Info(ctx context.Context, req *UserInfoReq) (resp *UserInfoResp, err error)
+	Page(ctx context.Context, req *UserPageReq) (resp *UserPageResp, err error)
 }
 
-func EchoServiceEcho(svc EchoServiceGinServer) func(ctx *gin.Context) {
+func UserServiceLogin(svc UserServiceGinServer) func(ctx *gin.Context) {
 	return func(ctx *gin.Context) {
-		req := &EchoReq{}
+		req := &LoginReq{}
 		if err := ctx.ShouldBindWith(req, binding.Default(ctx.Request.Method, ctx.Request.Header.Get("Content-Type"))); err != nil {
 			ctx.JSON(400, err)
 			ctx.Abort()
 			return
 		}
 
-		if resp, err := svc.Echo(ctx, req); err != nil {
-			ctx.JSON(500, err)
-			ctx.Abort()
-		} else {
-			ctx.JSON(200, resp)
-		}
-	}
-}
-func EchoServicePing(svc EchoServiceGinServer) func(ctx *gin.Context) {
-	return func(ctx *gin.Context) {
-		req := &PingReq{}
-		if err := ctx.ShouldBindWith(req, binding.Default(ctx.Request.Method, ctx.Request.Header.Get("Content-Type"))); err != nil {
-			ctx.JSON(400, err)
-			ctx.Abort()
-			return
-		}
-
-		if resp, err := svc.Ping(ctx, req); err != nil {
+		if resp, err := svc.Login(ctx, req); err != nil {
 			ctx.JSON(500, err)
 			ctx.Abort()
 		} else {
@@ -49,7 +34,47 @@ func EchoServicePing(svc EchoServiceGinServer) func(ctx *gin.Context) {
 	}
 }
 
-func RegisterEchoServiceGinServer(engine *gin.Engine, server EchoServiceGinServer) {
-	engine.POST("/v1/echo", EchoServiceEcho(server))
-	engine.GET("/v1/ping", EchoServicePing(server))
+func UserServiceInfo(svc UserServiceGinServer) func(ctx *gin.Context) {
+	return func(ctx *gin.Context) {
+		log.Println(ctx.Request.Header.Get("Content-Type"))
+
+		req := &UserInfoReq{}
+		if err := ctx.ShouldBindWith(req, binding.Default(ctx.Request.Method, ctx.Request.Header.Get("Content-Type"))); err != nil {
+			ctx.JSON(400, err)
+			ctx.Abort()
+			return
+		}
+
+		if resp, err := svc.Info(ctx, req); err != nil {
+			ctx.JSON(500, err)
+			ctx.Abort()
+		} else {
+			ctx.JSON(200, resp)
+		}
+	}
+}
+
+func UserServicePage(svc UserServiceGinServer) func(ctx *gin.Context) {
+	return func(ctx *gin.Context) {
+		req := &UserPageReq{}
+		if err := ctx.ShouldBindWith(req, binding.Default(ctx.Request.Method, ctx.Request.Header.Get("Content-Type"))); err != nil {
+			ctx.JSON(400, err)
+			ctx.Abort()
+			return
+		}
+
+		if resp, err := svc.Page(ctx, req); err != nil {
+			ctx.JSON(500, err)
+			ctx.Abort()
+		} else {
+			ctx.JSON(200, resp)
+		}
+	}
+}
+
+
+func RegisterUserServiceGinServer(engine *gin.Engine, server UserServiceGinServer) {
+	engine.POST("/user/login", UserServiceLogin(server))
+	engine.GET("/user/:id", UserServiceInfo(server))
+	engine.GET("/user", UserServicePage(server))
 }
