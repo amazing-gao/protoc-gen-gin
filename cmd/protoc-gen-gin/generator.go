@@ -42,12 +42,13 @@ func New() *Generator {
 // GenerateAllFiles godoc
 func (g *Generator) GenerateAllFiles() {
 	for _, file := range g.Request.GetProtoFile() {
+		g.Reset()
+		g.SetUp(file)
+
 		if !g.CanGenerate(g.FileName) {
 			continue
 		}
 
-		g.Reset()
-		g.SetUp(file)
 		g.ImportDefault()
 		g.GenCommentHead(GeneratorName)
 		g.GenPackageName()
@@ -108,6 +109,7 @@ func (g *Generator) GenSvcImplement() {
 			g.P("			ctx.Abort()")
 			g.F("		} else {")
 			g.P("			ctx.JSON(200, resp)")
+			g.P("			ctx.Abort()")
 			g.P("		}")
 			g.P("	}")
 			g.P("}")

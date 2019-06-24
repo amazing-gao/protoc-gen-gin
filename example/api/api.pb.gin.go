@@ -29,6 +29,7 @@ func UserServiceLogin(svc UserServiceGinServer) func(ctx *gin.Context) {
 			ctx.Abort()
 		} else {
 			ctx.JSON(200, resp)
+			ctx.Abort()
 		}
 	}
 }
@@ -47,6 +48,7 @@ func UserServiceInfo(svc UserServiceGinServer) func(ctx *gin.Context) {
 			ctx.Abort()
 		} else {
 			ctx.JSON(200, resp)
+			ctx.Abort()
 		}
 	}
 }
@@ -65,6 +67,7 @@ func UserServicePage(svc UserServiceGinServer) func(ctx *gin.Context) {
 			ctx.Abort()
 		} else {
 			ctx.JSON(200, resp)
+			ctx.Abort()
 		}
 	}
 }
