@@ -4,7 +4,6 @@
 package api
 
 import (
-	"log"
 	"context"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
@@ -36,8 +35,6 @@ func UserServiceLogin(svc UserServiceGinServer) func(ctx *gin.Context) {
 
 func UserServiceInfo(svc UserServiceGinServer) func(ctx *gin.Context) {
 	return func(ctx *gin.Context) {
-		log.Println(ctx.Request.Header.Get("Content-Type"))
-
 		req := &UserInfoReq{}
 		if err := ctx.ShouldBindWith(req, binding.Default(ctx.Request.Method, ctx.Request.Header.Get("Content-Type"))); err != nil {
 			ctx.JSON(400, err)
