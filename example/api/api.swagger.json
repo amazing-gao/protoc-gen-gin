@@ -15,18 +15,25 @@
     "application/json"
   ],
   "paths": {
-    "/user": {
+    "/friends/{id}": {
       "get": {
-        "operationId": "Page",
+        "operationId": "Friends",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiUserPageResp"
+              "$ref": "#/definitions/apiUserFriendsResp"
             }
           }
         },
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
           {
             "name": "page",
             "in": "query",
@@ -152,15 +159,7 @@
         }
       }
     },
-    "apiUserInfoResp": {
-      "type": "object",
-      "properties": {
-        "user": {
-          "$ref": "#/definitions/apiUser"
-        }
-      }
-    },
-    "apiUserPageResp": {
+    "apiUserFriendsResp": {
       "type": "object",
       "properties": {
         "users": {
@@ -180,6 +179,14 @@
         "total": {
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "apiUserInfoResp": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/apiUser"
         }
       }
     }

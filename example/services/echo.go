@@ -1,8 +1,8 @@
 package services
 
 import (
-	"log"
 	"context"
+	"log"
 
 	"github.com/BiteBit/protoc-gen-gin/example/api"
 )
@@ -19,15 +19,15 @@ func (ctrl *UserServices) Login(ctx context.Context, req *api.LoginReq) (*api.Lo
 	return resp, nil
 }
 
-func (ctrl *UserServices) Page(ctx context.Context, req *api.UserPageReq) (*api.UserPageResp, error) {
-	resp := &api.UserPageResp{}
+func (ctrl *UserServices) Friends(ctx context.Context, req *api.UserFriendsReq) (*api.UserFriendsResp, error) {
+	resp := &api.UserFriendsResp{}
 
 	log.Println(req)
 
 	return resp, nil
 }
 
-func (ctrl *UserServices) Info(ctx context.Context, req *api.UserInfoReq) (*api.UserInfoResp, error)  {
+func (ctrl *UserServices) Info(ctx context.Context, req *api.UserInfoReq) (*api.UserInfoResp, error) {
 	log.Println(req)
 
 	resp := &api.UserInfoResp{}

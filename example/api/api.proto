@@ -17,9 +17,9 @@ message User {
 
 message LoginReq {
   // 手机号码
-  string mobile = 1 [(gogoproto.moretags) = "binding:\"required\""];
+  string mobile = 1 [(gogoproto.moretags) = "json:\"mobile\" binding:\"required\""];
   // 短信验证码
-  string ticket = 2 [(gogoproto.moretags) = "binding:\"required\""];
+  string ticket = 2 [(gogoproto.moretags) = "json:\"ticket\" binding:\"required\""];
 }
 
 message LoginResp {
@@ -35,12 +35,13 @@ message UserInfoResp {
   User user = 1;
 }
 
-message UserPageReq {
-  int32 page = 1 [(gogoproto.moretags) = "form:\"page\" binding:\"required\""];
-  int32 size = 2 [(gogoproto.moretags) = "form:\"size\" binding:\"required\""];
+message UserFriendsReq {
+  int32 id = 1 [(gogoproto.moretags) = "uri:\"id\" binding:\"required\""];
+  int32 page = 2 [(gogoproto.moretags) = "form:\"page\""];
+  int32 size = 3 [(gogoproto.moretags) = "form:\"size\""];
 }
 
-message UserPageResp {
+message UserFriendsResp {
   repeated User users = 1 [(gogoproto.jsontag) = "users"];
   int32 page = 2 [(gogoproto.jsontag) = "page"];
   int32 size = 3 [(gogoproto.jsontag) = "size"];
@@ -62,9 +63,9 @@ service UserService {
     };
   }
 
-  rpc Page(UserPageReq) returns (UserPageResp) {
+  rpc Friends(UserFriendsReq) returns (UserFriendsResp) {
     option (google.api.http) = {
-      get: "/user"
+      get: "/friends/{id}"
     };
   }
 }

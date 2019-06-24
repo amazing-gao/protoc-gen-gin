@@ -12,7 +12,7 @@ import (
 type UserServiceGinServer interface {
 	Login(ctx context.Context, req *LoginReq) (resp *LoginResp, err error)
 	Info(ctx context.Context, req *UserInfoReq) (resp *UserInfoResp, err error)
-	Page(ctx context.Context, req *UserPageReq) (resp *UserPageResp, err error)
+	Friends(ctx context.Context, req *UserFriendsReq) (resp *UserFriendsResp, err error)
 }
 
 func UserServiceLogin(svc UserServiceGinServer) func(ctx *gin.Context) {
@@ -53,16 +53,16 @@ func UserServiceInfo(svc UserServiceGinServer) func(ctx *gin.Context) {
 	}
 }
 
-func UserServicePage(svc UserServiceGinServer) func(ctx *gin.Context) {
+func UserServiceFriends(svc UserServiceGinServer) func(ctx *gin.Context) {
 	return func(ctx *gin.Context) {
-		req := &UserPageReq{}
+		req := &UserFriendsReq{}
 		if err := ctx.ShouldBindWith(req, binding.Default(ctx.Request.Method, ctx.Request.Header.Get("Content-Type"))); err != nil {
 			ctx.JSON(400, err)
 			ctx.Abort()
 			return
 		}
 
-		if resp, err := svc.Page(ctx, req); err != nil {
+		if resp, err := svc.Friends(ctx, req); err != nil {
 			ctx.JSON(500, err)
 			ctx.Abort()
 		} else {
@@ -76,5 +76,5 @@ func UserServicePage(svc UserServiceGinServer) func(ctx *gin.Context) {
 func RegisterUserServiceGinServer(engine *gin.Engine, server UserServiceGinServer) {
 	engine.POST("/user/login", UserServiceLogin(server))
 	engine.GET("/user/:id", UserServiceInfo(server))
-	engine.GET("/user", UserServicePage(server))
+	engine.GET("/friends/:id", UserServiceFriends(server))
 }
