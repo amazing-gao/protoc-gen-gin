@@ -10,6 +10,7 @@ github.com/googleapis/googleapis/google/api
 # gRPC -> REST
 
 ## Google标准
+https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api
 
 使用这套标准的系统：
   1. https://github.com/googleapis/googleapis
