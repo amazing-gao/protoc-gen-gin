@@ -1,11 +1,16 @@
-module github.com/BiteBit/protoc-gen-gin
+module github.com/amazing-gao/protoc-gen-gin
 
 go 1.12
 
 require (
-	github.com/BiteBit/grpc-gateway-example v0.0.0-20190612124420-237385034f62
+	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/gin-gonic/gin v1.4.0
 	github.com/gogo/protobuf v1.2.1
-	github.com/golang/protobuf v1.3.1
-	google.golang.org/genproto v0.0.0-20180817151627-c66870c02cf8
+	github.com/golang/protobuf v1.5.2
+	github.com/kr/pretty v0.1.0 // indirect
+	github.com/stretchr/testify v1.7.0 // indirect
+	google.golang.org/genproto v0.0.0-20210426193834-eac7f76ac494
+	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
+	gopkg.in/yaml.v2 v2.3.0 // indirect
+	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )

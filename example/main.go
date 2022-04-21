@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/BiteBit/protoc-gen-gin/example/api"
-	"github.com/BiteBit/protoc-gen-gin/example/services"
+	"github.com/amazing-gao/protoc-gen-gin/example/api"
+	"github.com/amazing-gao/protoc-gen-gin/example/services"
 	"github.com/gin-gonic/gin"
 )
 

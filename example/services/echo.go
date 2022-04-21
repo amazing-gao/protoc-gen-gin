@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/BiteBit/protoc-gen-gin/example/api"
+	"github.com/amazing-gao/protoc-gen-gin/example/api"
 )
 
 type (

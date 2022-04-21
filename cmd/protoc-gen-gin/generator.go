@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"net/http"
 
-	"github.com/BiteBit/protoc-gen-gin/generator"
-	"github.com/BiteBit/protoc-gen-gin/tool"
+	"github.com/amazing-gao/protoc-gen-gin/generator"
+	"github.com/amazing-gao/protoc-gen-gin/tool"
 	"github.com/golang/protobuf/proto"
 	plugin "github.com/golang/protobuf/protoc-gen-go/plugin"
 	"google.golang.org/genproto/googleapis/api/annotations"

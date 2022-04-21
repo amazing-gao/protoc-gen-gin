@@ -1,7 +1,9 @@
 syntax = "proto3";
+
 package api;
 
-import "third_party/gogoproto/gogo.proto";
+option go_package = "github.com/amazing-gao/protoc-gen-gin/example/api;api";
+
 import "third_party/google/api/annotations.proto";
 
 message Error {
@@ -17,18 +19,18 @@ message User {
 
 message LoginReq {
   // 手机号码
-  string mobile = 1 [(gogoproto.moretags) = "json:\"mobile\" binding:\"required\""];
+  string mobile = 1;
   // 短信验证码
-  string ticket = 2 [(gogoproto.moretags) = "json:\"ticket\" binding:\"required\""];
+  string ticket = 2;
 }
 
 message LoginResp {
   Error error = 1;
-  string token = 2 [(gogoproto.jsontag) = "token"];
+  string token = 2;
 }
 
 message UserInfoReq {
-  int32 id = 1 [(gogoproto.moretags) = "uri:\"id\" binding:\"required\""];
+  int32 id = 1;
 }
 
 message UserInfoResp {
@@ -36,16 +38,16 @@ message UserInfoResp {
 }
 
 message UserFriendsReq {
-  int32 id = 1 [(gogoproto.moretags) = "uri:\"id\" binding:\"required\""];
-  int32 page = 2 [(gogoproto.moretags) = "form:\"page\""];
-  int32 size = 3 [(gogoproto.moretags) = "form:\"size\""];
+  int32 id = 1;
+  int32 page = 2;
+  int32 size = 3;
 }
 
 message UserFriendsResp {
-  repeated User users = 1 [(gogoproto.jsontag) = "users"];
-  int32 page = 2 [(gogoproto.jsontag) = "page"];
-  int32 size = 3 [(gogoproto.jsontag) = "size"];
-  int32 total = 4 [(gogoproto.jsontag) = "total"];
+  repeated User users = 1;
+  int32 page = 2;
+  int32 size = 3;
+  int32 total = 4;
 }
 
 
